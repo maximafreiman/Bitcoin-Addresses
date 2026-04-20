@@ -1,13 +1,10 @@
-# ================================
-# ECC: PRIVATE KEY → PUBLIC KEY
-# (secp256k1, tanpa library)
-# ================================
+# ECC: PRIVATE KEY → PUBLIC KEY (dengan secp256k1, tanpa library)
 
-# ---------- PARAMETER KURVA ----------
+# ---------- PARAMETER KURVA (JANGAN DIGANTI-GANTI!!) ----------
 # kurva: y^2 = x^3 + 7
 p = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F
 
-# generator point (G)
+# generator point (G) (SUDAH PAKEM SECARA INDUSTRI, TIDAK PERLU DISENTUH!!)
 Gx = 55066263022277343669578718895168534326250603453777594175500187360389116729240
 Gy = 32670510020758816978083085130507043184471273380659243275938904335757337460388
 G = (Gx, Gy)
@@ -19,7 +16,7 @@ k = int(priv_hex, 16)
 print("Private Key:")
 print(priv_hex)
 
-# ---------- RUMUS ECC ----------
+# ---------- RUMUS ECC (SUDAH PAKEM, JANGAN DIGANTI!!)----------
 def inv(n, p):
     return pow(n, -1, p)
 
@@ -58,7 +55,7 @@ def scalar_mult(k, P):
     
     return result
 
-# ---------- HITUNG PUBLIC KEY ----------
+# ---------- RUMUS UNTUK HITUNG PUBLIC KEY (JANGAN DIGANTI!!) ----------
 pub = scalar_mult(k, G)
 
 x, y = pub
@@ -67,7 +64,7 @@ print("\nPublic Key (X, Y):")
 print("X =", format(x, '064x'))
 print("Y =", format(y, '064x'))
 
-# ---------- FORMAT BITCOIN ----------
+# ---------- FORMAT BITCOIN (UNTUK MERINGKAS PUBLIC KEY. JANGAN DIGANTI!!)----------
 # uncompressed
 pub_uncompressed = "04" + format(x, '064x') + format(y, '064x')
 
