@@ -1,3 +1,10 @@
+# KODE ECC JENIS SECP256K1
+# SIMULASI MEMBUAT PUBLIC KEY MENGGUNAKAN PRIVATE KEY "7f3a9c5e8b2d4f1a6c9e0b3d5a7f8c2e1d4b6a9f0c3e7b2a5d8f1c6e9a4b3c2d"
+# JANGAN PERNAH KIRIM BITCOIN DARI ADDRESS UTAMA ANDA KE ADDRESS EKSPERIMENTAL INI KALAU MAU SIMULASI KIRIM DI HASIL AKHIR!!!
+# JANGAN PERNAH PAKAI PRIVATE KEY INI DI WALLET ANDA!!! KARENA SUDAH TERSEBAR DI INTERNET
+# MOHON BIJAK. INI HANYA EDUKASI SEMATA
+
+
 # === Curve Parameters (secp256k1) ===
 P = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F   ### bilangan prima besar (semua operasi mod ini)
 A = 0                                                                    ### parameter kurva (A = 0)
@@ -104,7 +111,7 @@ def decompress_public_key(compressed_key):
 if __name__ == "__main__":
 
     
-    priv_hex = "7f3a9c5e8b2d4f1a6c9e0b3d5a7f8c2e1d4b6a9f0c3e7b2a5d8f1c6e9a4b3c2d"     # <----------------- Masukkan data (private key hex) disini
+    priv_hex = "7f3a9c5e8b2d4f1a6c9e0b3d5a7f8c2e1d4b6a9f0c3e7b2a5d8f1c6e9a4b3c2d"     # <----------------- MASUKKAN PRIVATE KEY (HEXADECIMAL) DISINI!!!!!
 
     private_key = int(priv_hex, 16)                                   ### convert string hex → integer
 
@@ -117,10 +124,10 @@ if __name__ == "__main__":
     print("Y =", format(y, '064x'))
 
     compressed = compress_public_key(public_key)
-    print("\n=== COMPRESSED ===")
+    print("\n=== COMPRESSED, PUBLIC KEY YANG AKAN KITA PAKAI DI PROSES SELANJUTNYA (HASHING DI SHA256) ===")
     print(compressed.hex())
 
-    decompressed = decompress_public_key(compressed)
-    print("\n=== DECOMPRESSED ===")
+    decompressed = decompress_public_key(compressed)                   # <----------------- KODE PUBLIC KEY YANG "DECOMPRESSED" TIDAK WAJIB DI COPY PASTE KARENA SUDAH TIDAK STANDARD SEJAK LEGACY MODERN
+    print("\n=== DECOMPRESSED, SUDAH TIDAK DIPAKAI DI STANDARD ADDRESS MODERN ===")
     print("X =", format(decompressed[0], '064x'))
     print("Y =", format(decompressed[1], '064x'))
