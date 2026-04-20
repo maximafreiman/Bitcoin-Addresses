@@ -1,13 +1,12 @@
-# ================================
 # PURE SHA256 + PUBKEY (NO LIB)
-# ================================
 
-# ---------- PUBKEY (hasil ECC, contoh) ----------
+
+# ---------- PUBKEY (masukkan dari hasil ECC, pilih hasil yang compressed) ----------
 pubkey_hex = "033c83b7dff41e28512b667197db412a733767eaeeb2de4f56cc432bba027e7bc1"
 
 msg = bytes.fromhex(pubkey_hex)
 
-# ---------- CONSTANT ----------
+# ---------- CONSTANT (JANGAN DIGANTI-GANTI!!!) ----------
 K = [
     0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,
     0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
@@ -76,7 +75,7 @@ def sha256(msg):
     return ''.join(f'{x:08x}' for x in h)
 
 
-# ---------- RUN ----------
+# ---------- RUN (INI KATA PERINTAH UNTUK TERMINAL, JANGAN DIGANTI!!) ----------
 result = sha256(msg)
 
 print("Public Key:")
