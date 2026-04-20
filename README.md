@@ -8,13 +8,6 @@
 
 Repository / contoh ini **hanya untuk tujuan edukasi**, untuk memahami bagaimana proses pembuatan berbagai format address Bitcoin bekerja secara manual menggunakan Python.
 
-Address yang dihasilkan dari contoh ini bisa saja:
-
-* memakai checksum yang tidak valid,
-* memakai langkah yang tidak lengkap,
-* tidak memiliki private key yang aman,
-* tidak sesuai standar wallet modern,
-* atau tidak dapat dipulihkan.
 
 **Jika Anda mengirim Bitcoin ke address hasil eksperimen ini, Anda berisiko kehilangan dana permanen.**
 
