@@ -78,8 +78,5 @@ def sha256(msg):
 # ---------- RUN (INI KATA PERINTAH UNTUK TERMINAL, JANGAN DIGANTI!!) ----------
 result = sha256(msg)
 
-print("Public Key:")
-print(pubkey_hex)
-
 print("\nSHA256:")
 print(result)
