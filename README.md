@@ -115,7 +115,6 @@ Karakter ambigu seperti `0`, `O`, `I`, dan `l` dihapus.
 Format address Bitcoin modern meliputi:
 
 * Legacy / P2PKH (`1...`)
-* P2SH (`3...`)
 * Native SegWit Bech32 (`bc1q...`)
 * Taproot Bech32m (`bc1p...`)
 
