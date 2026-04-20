@@ -3,7 +3,7 @@
 # ================================
 
 # ---------- PUBKEY (hasil ECC, contoh) ----------
-pubkey_hex = "02c1e9b6b4d8c7f1a2b3c4d5e6f7890abc1234567890abcdef1234567890abcd"
+pubkey_hex = "033c83b7dff41e28512b667197db412a733767eaeeb2de4f56cc432bba027e7bc1"
 
 msg = bytes.fromhex(pubkey_hex)
 
