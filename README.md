@@ -22,8 +22,6 @@ Mendemonstrasikan secara transparan proses berikut menggunakan **Python murni ta
 1. Legacy / P2PKH (Base58Check)
 2. SegWit (Bech32)
 3. Taproot (Bech32m)
-4. Hashing dan checksum dasar
-5. Encoding address Bitcoin dengan Python
 
 ---
 
