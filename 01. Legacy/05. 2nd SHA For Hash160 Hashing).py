@@ -1,4 +1,4 @@
-# ---------- SHA256 FUNCTION (WAJIB ADA) ----------
+# ---------- RUMUS SHA256 MENTAH (WAJIB ADA) ----------
 K = [
     0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,
     0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
@@ -66,7 +66,7 @@ def sha256(msg):
     return ''.join(f'{x:08x}' for x in h)
 
 
-# ---------- INPUT ----------
+# ---------- MASUKKAN HASIL HASH160 ----------
 payload_hex = "004f6e669e65be170eae07d9a7d81e181a9886fec3"
 payload_bytes = bytes.fromhex(payload_hex)
 
