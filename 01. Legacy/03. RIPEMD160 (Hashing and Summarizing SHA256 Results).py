@@ -1,6 +1,5 @@
-# ================================
 # RIPEMD160 (NO LIB) + INPUT SHA256
-# ================================
+
 
 def rol(x, n):
     return ((x << n) | (x >> (32 - n))) & 0xffffffff
@@ -75,7 +74,7 @@ def ripemd160(msg):
     return ''.join(x.to_bytes(4,'little').hex() for x in [h0,h1,h2,h3,h4])
 
 
-# ---------- INPUT DARI LU ----------
+# ---------- MASUKKAN HASIL DARI SHA256 DISINI!! ----------
 sha_hex = "37d0987b72de5687eda73760e45611c8defc940b12a8feffdde08c5dbd429705"
 msg = bytes.fromhex(sha_hex)
 
