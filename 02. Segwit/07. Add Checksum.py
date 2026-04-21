@@ -1,7 +1,5 @@
-# -----------------------------------------
 # CREATE BECH32 CHECKSUM
-# WITHOUT LIBRARY
-# -----------------------------------------
+
 
 # Data With Witness Version
 data = [
@@ -13,9 +11,8 @@ data = [
 
 hrp = "bc"
 
-# -----------------------------------------
 # STEP 1: HRP EXPAND
-# -----------------------------------------
+
 def hrp_expand(text):
     left = []
     right = []
@@ -27,9 +24,9 @@ def hrp_expand(text):
 
     return left + [0] + right
 
-# -----------------------------------------
+
 # STEP 2: POLYMOD
-# -----------------------------------------
+
 def polymod(values):
     generators = [
         0x3b6a57b2,
@@ -51,9 +48,9 @@ def polymod(values):
 
     return chk
 
-# -----------------------------------------
+
 # STEP 3: CREATE CHECKSUM
-# -----------------------------------------
+
 values = hrp_expand(hrp) + data + [0, 0, 0, 0, 0, 0]
 
 pm = polymod(values) ^ 1
@@ -64,9 +61,9 @@ for i in range(6):
     value = (pm >> (5 * (5 - i))) & 31
     checksum.append(value)
 
-# -----------------------------------------
-# RESULT
-# -----------------------------------------
+
+# HASIL
+
 print("Checksum Values:")
 print(checksum)
 
