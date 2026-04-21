@@ -1,4 +1,6 @@
-# ---------- RUMUS SHA256 MENTAH (WAJIB ADA) ----------
+# === SHA256 (UNTUK CHECKSUM ROUND 1) ===
+
+# ---------- CONSTANT (JANGAN DISENTUH!) ----------
 K = [
     0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,
     0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
@@ -18,14 +20,21 @@ K = [
     0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
 ]
 
+
 def rotr(x, n):
     return ((x >> n) | (x << (32 - n))) & 0xffffffff
 
+
 def sha256(msg):
+    if not isinstance(msg, bytes):
+        raise TypeError("Input must be bytes")
+
     length = len(msg) * 8
     msg += b'\x80'
+
     while (len(msg) * 8) % 512 != 448:
         msg += b'\x00'
+
     msg += length.to_bytes(8, 'big')
 
     h = [
@@ -47,7 +56,7 @@ def sha256(msg):
             S1 = rotr(e,6) ^ rotr(e,11) ^ rotr(e,25)
             ch = (e & f) ^ (~e & g)
             temp1 = (hv + S1 + ch + K[j] + w[j]) & 0xffffffff
-            
+
             S0 = rotr(a,2) ^ rotr(a,13) ^ rotr(a,22)
             maj = (a & b) ^ (a & c) ^ (b & c)
             temp2 = (S0 + maj) & 0xffffffff
@@ -66,10 +75,18 @@ def sha256(msg):
     return ''.join(f'{x:08x}' for x in h)
 
 
-# ---------- MASUKKAN HASIL HASH160 ----------
-payload_hex = "004f6e669e65be170eae07d9a7d81e181a9886fec3"
-payload_bytes = bytes.fromhex(payload_hex)
+# === MAIN ===
+if __name__ == "__main__":
 
-# ---------- RUN ----------
-hash1 = sha256(payload_bytes)
-print(hash1)
+    
+    payload_hex = "004f6e669e65be170eae07d9a7d81e181a9886fec3"   ## <---- Masukkan payload hasil version + hash160 disini
+
+    if len(payload_hex) != 42:
+        raise ValueError("Payload must be 21 bytes (42 hex chars)")
+
+    payload_bytes = bytes.fromhex(payload_hex)
+
+    hash1 = sha256(payload_bytes)
+
+    print("SHA256 ROUND 1:")
+    print(hash1)
