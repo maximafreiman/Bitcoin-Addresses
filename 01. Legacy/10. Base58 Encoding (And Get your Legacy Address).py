@@ -2,14 +2,13 @@ data_hex = "004f6e669e65be170eae07d9a7d81e181a9886fec39ba94fc0"    # <----------
 
 alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 
-# hex -> integer
-num = int(data_hex, 16)
 
-# konversi ke base58
+num = int(data_hex, 16)                              # hex -> integer
+
+
 encoded = ""
-
 while num > 0:
-    num, rem = divmod(num, 58)
+    num, rem = divmod(num, 58)                       # konversi ke base58
     encoded = alphabet[rem] + encoded
 
 leading_zero_bytes = 0
