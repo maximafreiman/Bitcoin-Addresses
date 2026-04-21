@@ -1,7 +1,7 @@
-# CREATE BECH32 CHECKSUM
+# BUAT BECH32 CHECKSUM
 
 
-# Data With Witness Version
+# Data + Witness Version
 data = [
     0, 9, 29, 23, 6, 13, 7, 19, 5, 23, 24,
     11, 16, 29, 11, 16, 7, 27, 6, 19, 29,
