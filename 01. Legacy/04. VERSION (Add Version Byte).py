@@ -1,16 +1,29 @@
-# TAMBAHKAN VERSION BYTE ('00' UNTUK MAINNET LEGACY)
 
 
+
+
+# === VERSION BYTE + HASH160 ===
+
+## <---- Masukkan data (HASH160 hex, hasil RIPEMD160) disini
 hash160_hex = "4f6e669e65be170eae07d9a7d81e181a9886fec3"
 
-# convert ke bytes
-hash160 = bytes.fromhex(hash160_hex)
 
-# version byte (mainnet)
-version = b'\x00'
+# === VALIDASI INPUT ===
+if len(hash160_hex) != 40:
+    raise ValueError("HASH160 harus 20 byte (40 hex karakter)")      ### RIPEMD160 = 160 bit = 20 byte
 
-# gabung
-payload = version + hash160
 
-print("Version + HASH160:")
-print(payload.hex())
+# === CONVERT ===
+hash160 = bytes.fromhex(hash160_hex)                                 ### ubah hex → bytes
+
+
+# === VERSION BYTE ===
+version = b'\x00'                                                    ### 0x00 = Bitcoin mainnet (P2PKH)
+
+
+# === GABUNG ===
+payload = version + hash160                                          ### ini disebut payload address
+
+
+print("=== VERSION + HASH160 ===")
+print(payload.hex())     
