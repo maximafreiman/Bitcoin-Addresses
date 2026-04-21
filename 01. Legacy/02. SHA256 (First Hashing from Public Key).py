@@ -6,7 +6,7 @@
 
 # ---------- PUBKEY (hasil dari ECC, pakai compressed) ----------
 
-pubkey_hex = "033c83b7dff41e28512b667197db412a733767eaeeb2de4f56cc432bba027e7bc1" ## <---- MASUKKAN PUBLIC KEY COMPRESSED HEX DISINI!!!
+pubkey_hex = "033c83b7dff41e28512b667197db412a733767eaeeb2de4f56cc432bba027e7bc1" ## <---- MASUKKAN PUBLIC KEY COMPRESSED HEX DISINI!!! 
 
 msg = bytes.fromhex(pubkey_hex)                                     ### ubah hex → bytes (biar bisa diproses hashing)
 
