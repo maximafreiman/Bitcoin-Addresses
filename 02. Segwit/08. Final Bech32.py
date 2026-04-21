@@ -1,9 +1,8 @@
-# -----------------------------------------
 # FINAL BECH32 ADDRESS
-# WITHOUT LIBRARY
+# NO LIBRARY
 # -----------------------------------------
 
-# payload data (with witness version)
+# payload data (+ witness version)
 data = [
     0, 9, 29, 23, 6, 13, 7, 19, 5, 23, 24,
     11, 16, 29, 11, 16, 7, 27, 6, 19, 29,
@@ -14,29 +13,29 @@ data = [
 # checksum result
 checksum = [4, 16, 3, 22, 11, 1]
 
-# Bech32 charset
+# Bech32 charset (udah standard dari Pieter Wuille dan Gregory Maxwell)
 charset = "qpzry9x8gf2tvdw0s3jn54khce6mua7l"
 
-# -----------------------------------------
+
 # STEP 1: COMBINE DATA + CHECKSUM
-# -----------------------------------------
+
 combined = data + checksum
 
-# -----------------------------------------
-# STEP 2: CONVERT VALUES TO CHARACTERS
-# -----------------------------------------
+
+# STEP 2: konversi nilai ke karakter
+
 encoded = ""
 
 for value in combined:
     encoded += charset[value]
 
-# -----------------------------------------
-# STEP 3: ADD PREFIX
-# -----------------------------------------
+
+# STEP 3: TAMBAHKAN PREFIX
+
 address = "bc1" + encoded
 
-# -----------------------------------------
-# RESULT
-# -----------------------------------------
+
+# RESULT (ADDRESS SEGWIT NIH BOSS!!)
+
 print("Final Bech32 Address:")
 print(address)
