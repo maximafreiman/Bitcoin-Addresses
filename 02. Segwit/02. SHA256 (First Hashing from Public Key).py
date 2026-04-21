@@ -1,10 +1,15 @@
-# PURE SHA256 + PUBKEY (NO LIB)
+# SHA256 (SECURE HASH ALGORITHM 256 BIT)
+# SIMULASI HASHING PUBLIC KEY 
+# JANGAN PERNAH KIRIM BITCOIN DARI ADDRESS UTAMA ANDA KE ADDRESS EKSPERIMENTAL INI KALAU MAU SIMULASI KIRIM DI HASIL AKHIR!!!
+# JANGAN PERNAH PAKAI PRIVATE KEY INI DI WALLET ANDA!!! KARENA SUDAH TERSEBAR DI INTERNET
+# MOHON BIJAK. INI HANYA EDUKASI SEMATA
 
+# ---------- PUBKEY (hasil dari ECC, pakai compressed) ----------
 
-# ---------- PUBKEY (masukkan dari hasil ECC, pilih hasil yang compressed) ----------
-pubkey_hex = "033c83b7dff41e28512b667197db412a733767eaeeb2de4f56cc432bba027e7bc1"
+pubkey_hex = "033c83b7dff41e28512b667197db412a733767eaeeb2de4f56cc432bba027e7bc1" ## <---- MASUKKAN PUBLIC KEY COMPRESSED HEX DISINI!!! 
 
-msg = bytes.fromhex(pubkey_hex)
+msg = bytes.fromhex(pubkey_hex)                                     ### ubah hex → bytes (biar bisa diproses hashing)
+
 
 # ---------- CONSTANT (JANGAN DIGANTI-GANTI!!!) ----------
 K = [
@@ -24,38 +29,48 @@ K = [
     0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
     0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,
     0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
-]
+]                                                                     ### konstanta SHA-256 (fixed, bagian dari standar)
+
 
 def rotr(x, n):
-    return ((x >> n) | (x << (32 - n))) & 0xffffffff
+    return ((x >> n) | (x << (32 - n))) & 0xffffffff                  ### rotate right (operasi bit dasar SHA256)
+
 
 def sha256(msg):
-    # padding
-    length = len(msg) * 8
-    msg += b'\x80'
+    ### ===== STEP 1: PADDING =====
+    length = len(msg) * 8                                             ### panjang asli (dalam bit)
+    msg += b'\x80'                                                    ### tambah bit 1 (awal padding)
+    
     while (len(msg) * 8) % 512 != 448:
-        msg += b'\x00'
-    msg += length.to_bytes(8, 'big')
+        msg += b'\x00'                                                ### isi nol sampai 448 bit
+    
+    msg += length.to_bytes(8, 'big')                                  ### tambahkan panjang asli di akhir
 
+
+    ### ===== STEP 2: INITIAL HASH =====
     h = [
         0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,
         0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19
-    ]
+    ]                                                                 ### nilai awal (fixed)
 
-    for i in range(0, len(msg), 64):
+
+    ### ===== STEP 3: PROCESS BLOCK =====
+    for i in range(0, len(msg), 64):                                  ### proses per 512 bit (64 byte)
+        
         w = [int.from_bytes(msg[i+j:i+j+4], 'big') for j in range(0,64,4)]
+                                                                      ### pecah jadi 16 word awal
 
         for j in range(16, 64):
             s0 = rotr(w[j-15],7) ^ rotr(w[j-15],18) ^ (w[j-15] >> 3)
             s1 = rotr(w[j-2],17) ^ rotr(w[j-2],19) ^ (w[j-2] >> 10)
-            w.append((w[j-16] + s0 + w[j-7] + s1) & 0xffffffff)
+            w.append((w[j-16] + s0 + w[j-7] + s1) & 0xffffffff)       ### expand jadi 64 word
 
-        a,b,c,d,e,f,g,hv = h
+        a,b,c,d,e,f,g,hv = h                                          ### copy state awal
 
         for j in range(64):
             S1 = rotr(e,6) ^ rotr(e,11) ^ rotr(e,25)
             ch = (e & f) ^ (~e & g)
-            temp1 = (hv + S1 + ch + K[j] + w[j]) & 0xffffffff
+            temp1 = (hv + S1 + ch + K[j] + w[j]) & 0xffffffff         ### campuran utama
             
             S0 = rotr(a,2) ^ rotr(a,13) ^ rotr(a,22)
             maj = (a & b) ^ (a & c) ^ (b & c)
@@ -68,15 +83,17 @@ def sha256(msg):
             d = c
             c = b
             b = a
-            a = (temp1 + temp2) & 0xffffffff
+            a = (temp1 + temp2) & 0xffffffff                          ### update state
 
-        h = [(x+y) & 0xffffffff for x,y in zip(h, [a,b,c,d,e,f,g,hv])]
-
-    return ''.join(f'{x:08x}' for x in h)
+        h = [(x+y) & 0xffffffff for x,y in zip(h, [a,b,c,d,e,f,g,hv])] ### gabung hasil
 
 
-# ---------- RUN (INI KATA PERINTAH UNTUK TERMINAL, JANGAN DIGANTI!!) ----------
+    ### ===== STEP 4: OUTPUT =====
+    return ''.join(f'{x:08x}' for x in h)                             ### hasil akhir (hex 64 karakter)
+
+
+# ---------- RUN ----------
 result = sha256(msg)
 
-print("\nSHA256:")
+print("\nHASIL SHA256:")
 print(result)
