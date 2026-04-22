@@ -6,7 +6,7 @@
 
 **JANGAN PERNAH mengirim Bitcoin ke address yang dibuat dari proyek ini.**
 
-Repository / contoh ini **hanya untuk tujuan edukasi**, untuk memahami bagaimana proses pembuatan berbagai format address Bitcoin bekerja secara manual menggunakan Python.
+Repository / contoh ini **hanya untuk tujuan edukasi bahwa kriptografi Bitcoin terdiri lebih dari 1 lapis**, untuk memahami bagaimana proses pembuatan berbagai format address Bitcoin bekerja secara manual menggunakan Python.
 
 
 **Jika Anda mengirim Bitcoin ke address hasil eksperimen ini, Anda berisiko kehilangan dana permanen.**
