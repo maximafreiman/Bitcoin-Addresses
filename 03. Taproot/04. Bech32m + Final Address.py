@@ -1,21 +1,19 @@
-# ==========================================
-# RAW TAPROOT STEP 3 (NO LIBRARY)
-# Convert Taproot Output Key -> Bech32m Address
+# Konversi Taproot Output Key -> Bech32m Address
 # witness version = 1
 # HRP = bc
-# ==========================================
+
 
 # GANTI dengan Qx hasil code sebelumnya
 prog_hex = "28bac758f70d663d786ed682325a81bf56fc0cc7963f58b328cc61aec1949d06"
 
-# ----------------------------------
-# Bech32 charset
-# ----------------------------------
-CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l"
 
-# ----------------------------------
+# Bech32 charset
+
+CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l"  # Udah standar Pieter Wuille dan Gregory Maxwell
+
+
 # polymod
-# ----------------------------------
+
 def polymod(values):
     GEN = [0x3b6a57b2,0x26508e6d,0x1ea119fa,0x3d4233dd,0x2a1462b3]
     chk = 1
@@ -30,9 +28,8 @@ def polymod(values):
 
     return chk
 
-# ----------------------------------
 # hrp expand
-# ----------------------------------
+
 def hrp_expand(hrp):
     out = []
 
@@ -46,9 +43,9 @@ def hrp_expand(hrp):
 
     return out
 
-# ----------------------------------
+
 # create checksum (Bech32m)
-# ----------------------------------
+
 def create_checksum(hrp, data):
     const = 0x2bc830a3   # Bech32m constant
     values = hrp_expand(hrp) + data + [0,0,0,0,0,0]
@@ -61,9 +58,9 @@ def create_checksum(hrp, data):
 
     return ret
 
-# ----------------------------------
+
 # convert bits 8 -> 5
-# ----------------------------------
+
 def convertbits(data, frombits, tobits, pad=True):
     acc = 0
     bits = 0
@@ -84,9 +81,9 @@ def convertbits(data, frombits, tobits, pad=True):
 
     return ret
 
-# ----------------------------------
+
 # encode
-# ----------------------------------
+
 def bech32m_encode(hrp, witver, prog):
     data = [witver] + convertbits(prog, 8, 5, True)
     checksum = create_checksum(hrp, data)
@@ -94,9 +91,9 @@ def bech32m_encode(hrp, witver, prog):
 
     return hrp + "1" + "".join(CHARSET[d] for d in combined)
 
-# ----------------------------------
+
 # MAIN
-# ----------------------------------
+
 program = bytes.fromhex(prog_hex)
 
 addr = bech32m_encode("bc", 1, program)
