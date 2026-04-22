@@ -1,11 +1,9 @@
-# ==========================================
 # RAW TAPTWEAK (NO EXTERNAL LIBRARY)
 # BIP340 / BIP341 Correct Tagged Hash
 # Input pubkey:
 # 033c83b7dff41e28512b667197db412a733767eaeeb2de4f56cc432bba027e7bc1
 # Uses x-only:
 # 3c83b7dff41e28512b667197db412a733767eaeeb2de4f56cc432bba027e7bc1
-# ==========================================
 
 K = [
 0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
@@ -103,7 +101,7 @@ tag = b"TapTweak"
 taghash = sha256(tag)
 
 xonly = bytes.fromhex(
-"3c83b7dff41e28512b667197db412a733767eaeeb2de4f56cc432bba027e7bc1"
+"3c83b7dff41e28512b667197db412a733767eaeeb2de4f56cc432bba027e7bc1"  # <----------------- Masukkan COMPRESSED PUBLIC KEY TANPA 03/02 DISINI!!!
 )
 
 taptweak = sha256(taghash + taghash + xonly)
