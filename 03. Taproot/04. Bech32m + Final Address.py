@@ -3,8 +3,8 @@
 # HRP = bc
 
 
-# GANTI dengan Qx hasil code sebelumnya
-prog_hex = "28bac758f70d663d786ed682325a81bf56fc0cc7963f58b328cc61aec1949d06"
+
+prog_hex = "28bac758f70d663d786ed682325a81bf56fc0cc7963f58b328cc61aec1949d06"  # <------------------  GANTI dengan Qx hasil code sebelumnya
 
 
 # Bech32 charset
