@@ -1,0 +1,7 @@
+01. https://github.com/btclib-org/btclib/tree/master/btclib
+02. https://github.com/Simplexum/python-bitcointx
+03. https://github.com/diybitcoinhardware/embit/tree/master/secp256k1
+04. https://github.com/buidl-bitcoin/buidl-python/tree/main/buidl
+05. https://github.com/bitcoinops/taproot-workshop
+06. https://github.com/ofek/bit/tree/master/bit
+07. https://github.com/spesmilo/electrum/tree/master/electrum
