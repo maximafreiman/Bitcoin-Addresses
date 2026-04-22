@@ -1,8 +1,7 @@
-# ==========================================
 # RAW TAPROOT STEP 2 (NO LIBRARY)
-# Compute Q = P + tweak*G
-# Then output x(Q)
-# ==========================================
+# Hitung Q = P + tweak*G
+# Cari Output x(Q)
+
 
 # secp256k1 params
 P_FIELD = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F
@@ -11,15 +10,14 @@ N = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
 Gx = 55066263022277343669578718895168534326250603453777594175500187360389116729240
 Gy = 32670510020758816978083085130507043184471273380659243275938904335757337482424
 
-# ---------------------------
 # modular inverse
-# ---------------------------
+
 def inv(a, n):
     return pow(a, n-2, n)
 
-# ---------------------------
+
 # point add
-# ---------------------------
+
 def point_add(A, B):
     if A is None:
         return B
@@ -42,9 +40,9 @@ def point_add(A, B):
 
     return (x3,y3)
 
-# ---------------------------
-# scalar multiply
-# ---------------------------
+
+# Perkalian skalar
+
 def scalar_mult(k, P):
     R = None
     addend = P
@@ -57,9 +55,9 @@ def scalar_mult(k, P):
 
     return R
 
-# ---------------------------
+
 # decompress compressed pubkey
-# ---------------------------
+
 pubkey = "033c83b7dff41e28512b667197db412a733767eaeeb2de4f56cc432bba027e7bc1"
 
 prefix = int(pubkey[:2],16)
@@ -75,17 +73,16 @@ if y % 2 != (prefix % 2):
 
 P = (x,y)
 
-# ---------------------------
-# tweak scalar (hasil sebelumnya)
-# ---------------------------
+
+
+
 tweak = int(
-"0805a9f5b0c1b069a01caa2e274977980c85c47eab2b8de377ba732a1ddd78a4",
+"0805a9f5b0c1b069a01caa2e274977980c85c47eab2b8de377ba732a1ddd78a4",    # <------------ masukkan tweak scalar (hasil sebelumnya)
 16
 )
 
-# ---------------------------
 # Q = P + tweak*G
-# ---------------------------
+
 G = (Gx,Gy)
 
 tG = scalar_mult(tweak, G)
