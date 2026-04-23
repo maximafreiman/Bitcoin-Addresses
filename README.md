@@ -1,5 +1,40 @@
 # Bitcoin Address Creation Demo (Python, No Library)
 
+> Covers Legacy, SegWit, and Taproot progressively.
+
+## ⚠️ STRONG WARNING
+
+This repository / example is **for educational purposes only**, demonstrating that Bitcoin cryptography consists of multiple layers, and to help understand how different Bitcoin address formats are manually generated using pure Python.
+
+**If you send Bitcoin to addresses generated from this experiment, you risk permanent loss of funds.**
+
+Always use official and trusted wallets for real transactions. If you casually send a large amount of Bitcoin, it may not be recoverable, because addresses like these may not be generated or managed by any wallet.
+
+Bitcoin is a purely cryptographic form of money with consensus rooted in Austrian Economics. There is no central auditor. You are fully responsible for the ownership of your Bitcoin.
+
+---
+
+## Project Goals
+
+To transparently demonstrate the following processes using **pure Python without external libraries**:
+
+1. Legacy / P2PKH (Base58Check) (`1...`)
+2. SegWit / P2WPKH (Bech32) (`bc1q...`)
+3. Taproot / P2TR (Bech32m) (`bc1p...`)
+
+---
+
+## Final Disclaimer
+
+**This is an educational simulation. Do not use the results to store funds. Do not send Bitcoin to these example addresses.**
+
+
+
+
+======================================================================================
+
+
+
 > Mencakup Legacy, SegWit, dan Taproot secara bertahap.
 
 ## ⚠️ PERINGATAN KERAS
@@ -20,104 +55,10 @@ Bitcoin adalah uang berbasis kriptografi murni dengan konsesus berbasis Austrian
 
 Mendemonstrasikan secara transparan proses berikut menggunakan **Python murni tanpa library eksternal**:
 
-1. Legacy / P2PKH (Base58Check)
-2. SegWit (Bech32)
-3. Taproot (Bech32m)
+1. Legacy / P2PKH (Base58Check) (`1...`)
+2. SegWit / P2WPKH (Bech32) (`bc1q...`)
+3. Taproot / P2TR (Bech32m) (`bc1p...`)
 
----
-
-## Contoh Data (Legacy Demo)
-
-```text
-HASH160:
-4f6e669e65be170eae07d9a7d81e181a9886fec3
-```
-
-Version byte mainnet P2PKH:
-
-```text
-00
-```
-
-Contoh checksum (demo):
-
-```text
-9ba94fc0
-```
-
-Final hex sebelum Base58:
-
-```text
-004f6e669e65be170eae07d9a7d81e181a9886fec39ba94fc0
-```
-
----
-
-## Python Code (Base58Check Encode)
-
-```python
-data_hex = "004f6e669e65be170eae07d9a7d81e181a9886fec39ba94fc0"
-
-alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
-
-num = int(data_hex, 16)
-encoded = ""
-
-while num > 0:
-    num, rem = divmod(num, 58)
-    encoded = alphabet[rem] + encoded
-
-leading_zero_bytes = 0
-for i in range(0, len(data_hex), 2):
-    if data_hex[i:i+2] == "00":
-        leading_zero_bytes += 1
-    else:
-        break
-
-encoded = ("1" * leading_zero_bytes) + encoded
-
-print(encoded)
-```
-
----
-
-## Cara Kerja Singkat
-
-### 1. Version Byte
-
-`00` menandakan alamat Bitcoin legacy mainnet (P2PKH).
-
-### 2. Checksum
-
-Checksum normalnya dihitung dengan:
-
-```text
-SHA256(SHA256(version + hash160))
-```
-
-Lalu ambil 4 byte pertama.
-
-### 3. Base58
-
-Data final diubah ke alfabet Base58:
-
-```text
-123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz
-```
-
-Karakter ambigu seperti `0`, `O`, `I`, dan `l` dihapus.
-
----
-
-## Catatan Penting
-
-Format address Bitcoin modern meliputi:
-
-* Legacy / P2PKH (`1...`)
-* Native SegWit Bech32 (`bc1q...`)
-* Taproot Bech32m (`bc1p...`)
-
-README ini akan berkembang untuk mencakup semuanya, dimulai dari contoh Legacy agar fondasi encoding mudah
 
 ---
 
